@@ -1,0 +1,51 @@
+// This is the build.gradle file for the app module of your Flutter project.
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 33 // Set the compile SDK version (latest stable version)
+
+    defaultConfig {
+        applicationId "com.example.myapp" // Replace with your application's ID
+        minSdkVersion 21 // Minimum SDK version your app supports
+        targetSdkVersion 33 // Target SDK version (latest stable version)
+        versionCode flutterVersionCode.toInteger() // Increment this value for each new release
+        versionName flutterVersionName // Update this to your app's version (e.g., "1.0.0")
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner" // Default testing runner
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("path/to/your/keystore.jks") // Replace with your keystore file location
+            storePassword "your_keystore_password" // Replace with your keystore password
+            keyAlias "your_key_alias" // Replace with your key alias
+            keyPassword "your_key_password" // Replace with your key password
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release // Configure signing for release build
+            minifyEnabled false // Set to 'true' if you want to enable ProGuard for minification
+            shrinkResources false // Set to 'true' if you want to shrink resources
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro' // Optional ProGuard rules
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false // Prevent lint errors from blocking the release build
+        abortOnError false // Avoid build failure if lint errors are found
+    }
+}
+
+dependencies {
+    // Add any dependencies your app needs here
+    implementation 'com.android.support:appcompat-v7:28.0.0' // For compatibility support library
+    implementation 'com.google.firebase:firebase-core:17.0.0' // If you're using Firebase
+    // Example of adding other dependencies
+    implementation 'androidx.appcompat:appcompat:1.2.0' // Or any other dependencies you may need
+}
+
+// Additional configurations for Flutter
+flutter {
+    source '../..' // Path to your Flutter project root
+}
